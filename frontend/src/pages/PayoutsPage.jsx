@@ -17,8 +17,8 @@ const PayoutsPage = () => {
   const [pagination, setPagination] = useState({ total: 0, page: 1, totalPages: 1 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [filters, setFilters] = useState({ status: '', vendor_id: '' });
-  const [appliedFilters, setAppliedFilters] = useState({ status: '', vendor_id: '' });
+  const [filters, setFilters] = useState({ status: 'Draft', vendor_id: '' });
+  const [appliedFilters, setAppliedFilters] = useState({ status: 'Draft', vendor_id: '' });
 
   const fetchPayouts = useCallback(async (params = {}) => {
     setLoading(true);
@@ -35,7 +35,7 @@ const PayoutsPage = () => {
   }, []);
 
   useEffect(() => {
-    fetchPayouts();
+    fetchPayouts({ status: 'Draft' });
     vendorAPI.getAll().then(({ data }) => setVendors(data.data.vendors)).catch(() => {});
   }, [fetchPayouts]);
 
